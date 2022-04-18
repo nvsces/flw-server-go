@@ -17,7 +17,7 @@ type TripItem interface {
 	Create(item trip.TripItem) (int, error)
 	GetAll() ([]repository.ObjectOutputJson, error)
 	GetById(itemId int) (trip.TripItem, error)
-	Delete(itemId int) error
+	Delete(userId,itemId int) error
 }
 
 type Service struct {

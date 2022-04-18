@@ -75,8 +75,8 @@ func (r *TripItemPostgres) GetById(itemId int) (trip.TripItem, error) {
 	return item, nil
 }
 
-func (r *TripItemPostgres) Delete(itemId int) error {
-	query := fmt.Sprintf(`DELETE  FROM trip_items WHERE trip_items.id = $1`)
-	_, err := r.db.Exec(query, itemId)
+func (r *TripItemPostgres) Delete(userId, itemId int) error {
+	query := fmt.Sprintf(`DELETE  FROM trip_items WHERE trip_items.id = $1 AND trip_items.author_id = $2`)
+	_, err := r.db.Exec(query, itemId, userId)
 	return err
 }

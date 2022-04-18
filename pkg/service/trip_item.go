@@ -25,10 +25,6 @@ func (s *TripItemService) GetById(itemId int) (trip.TripItem, error) {
 	return s.repo.GetById(itemId)
 }
 
-func (s *TripItemService) Delete(itemId int) error {
-	return s.repo.Delete( itemId)
+func (s *TripItemService) Delete(userId, itemId int) error {
+	return s.repo.Delete(userId, itemId)
 }
-
-// func (s *TodoItemService) Update(userId, itemId int, input todo.UpdateItemInput) error {
-// 	return s.repo.Update(userId, itemId, input)
-// }
