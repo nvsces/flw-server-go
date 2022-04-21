@@ -18,14 +18,20 @@ type TripItem interface {
 	Delete(userId,itemId int) error
 }
 
+type Profile interface{
+	Info(userId int) (trip.User, error)
+}
+
 type Repository struct {
 	Authorization
 	TripItem
+	Profile
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
 		TripItem: NewTripItemPostgres(db),
+		Profile: NewProfilehPostgres(db),
 	}
 }

@@ -22,6 +22,9 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	}
 
 	api := router.Group("/api")
+
+		api.GET("/profile",h.userIdentity, h.info)
+
 	{
 		items := api.Group("/items")
 		{

@@ -46,6 +46,7 @@ func main() {
     handlers:= handler.NewHandler(services)
 
    srv:=new(trip.Server)
+//    service.SendMessage();
    if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err !=nil {
        log.Fatalf("error accured while running http server : %s", err.Error())
    }
