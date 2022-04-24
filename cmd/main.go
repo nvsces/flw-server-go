@@ -29,7 +29,8 @@ func main() {
 	}
 
 	db, err := repository.NewPostgresDB(repository.Config{
-		Host:     viper.GetString("db.host"),
+		// Host:     viper.GetString("db.host"),
+		Host: "172.10.0.2",
 		Port:     viper.GetString("db.port"),
 		Username: viper.GetString("db.username"),
 		DBName:   viper.GetString("db.dbname"),

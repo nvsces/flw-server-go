@@ -1,5 +1,3 @@
-
-  
 #!/bin/sh
 # wait-for-postgres.sh
 

@@ -1,16 +1,6 @@
-version: '3.8'
+version: '2.2'
 
 services:
-  flw-server-go:
-    build: ./
-    command: ./wait-for-postgres.sh db ./flw-server-go
-    ports:
-      - 8000:8000
-    depends_on:
-      - db
-    environment:
-      - DB_PASSWORD=qwerty
-
   db:
     restart: always
     image: postgres:latest
@@ -20,3 +10,28 @@ services:
       - POSTGRES_PASSWORD=qwerty
     ports:
       - 5432:5432
+    networks:
+      - bridge
+
+  flw-server-go:
+    build: ./
+    command: ./wait-for-postgres.sh db ./flw-server-go
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - DB_PASSWORD=qwerty
+    networks:
+      - bridge
+
+networks:
+  bridge:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.10.1.0/16
+         gateway: 172.10.1.1
+         aux_addresses:
+           todo-app: 172.10.1.10   
+           db: 172.10.1.30
