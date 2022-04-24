@@ -1,7 +1,19 @@
-FROM golang:latest
-RUN mkdir app
-WORKDIR /app
-COPY . .
-RUN go build -o main .
-RUN chmod +x ./main
-CMD ["./main"]
+FROM golang:1.13-buster
+
+RUN go version
+ENV GOPATH=/
+
+COPY ./ ./
+
+# install psql
+RUN apt-get update
+RUN apt-get -y install postgresql-client
+
+# make wait-for-postgres.sh executable
+RUN chmod +x wait-for-postgres.sh
+
+# build go app
+RUN go mod download
+RUN go build -o flw-server-go ./cmd/main.go
+
+CMD ["./flw-server-go"]
