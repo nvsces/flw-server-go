@@ -11,10 +11,19 @@ import (
 func (h *Handler) createItem(c *gin.Context){
 
 	var input trip.TripItem
+
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
+
+	userId, err := getUserId(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	input.Author=userId
 
 	id, err := h.services.TripItem.Create(input)
 	if err != nil {

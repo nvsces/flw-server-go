@@ -2,7 +2,7 @@ package trip
 
 type TripItem struct {
 	Id          int    `json:"id" db:"id"`
-	Author      int   `json:"author" db:"author_id" binding:"required"`
+	Author      int   `json:"author" db:"author_id"`
 	Date 		string `json:"date" db:"date"`
 	Route 		string `json:"route" db:"route"`
 	Count 		string `json:"count" db:"count"`
